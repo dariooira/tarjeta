@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academia Cortex - Formulario estadístico de activación mental</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/print.css" media="print">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="js/pdf-export.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="img/cortex-logo.svg" alt="Academia Cortex Logo" class="logo-img">
+        </div>
+        <h1>Academia Cortex</h1>
+        <h2>Formulario estadístico de activación mental</h2>
+        <p class="tagline">Para los que quieren formar parte del 2% de las personas con capacidades mentales extraordinarias</p>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="tabs">
+                <button class="tab-btn active" onclick="openTab('data-entry')">Entrada de datos</button>
+                <button class="tab-btn" onclick="openTab('report')">Informe</button>
+            </div>
+
+            <div id="data-entry" class="tab-content active">
+                <h3>Datos del estudiante</h3>
+                <div class="form-group">
+                    <label for="student-name">Nombre del estudiante:</label>
+                    <input type="text" id="student-name" placeholder="Ej: Erick Girón">
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Fecha:</label>
+                    <input type="date" id="date">
+                </div>
+
+                <div class="form-group">
+                    <label for="country">País:</label>
+                    <select id="country">
+                        <option value="">Seleccionar país</option>
+                        <option value="Peru">Perú</option>
+                        <option value="Chile">Chile</option>
+                        <option value="España">España</option>
+                        <option value="Australia">Australia</option>
+                        <option value="Mexico">México</option>
+                        <option value="Colombia">Colombia</option>
+                        <option value="EEUU">EEUU</option>
+                        <option value="Italia">Italia</option>
+                        <option value="Uruguay">Uruguay</option>
+                        <option value="Ecuador">Ecuador</option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Costa Rica">Costa Rica</option>
+                        <option value="Francia">Francia</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Notas:</label>
+                    <textarea id="notes" placeholder="Ej: 2 dia de Practica: 1. mov lateral Izq 2. GL Derecha 3. Garganta"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="testimony">Testimonio:</label>
+                    <textarea id="testimony" placeholder="Testimonio del estudiante"></textarea>
+                </div>
+
+                <h3>Registros de visualización</h3>
+                <div id="vision-records-container">
+                    <div class="vision-records">
+                        <div class="record-group">
+                            <div class="group-header">
+                                <h4>Lateral Izquierdo (LAI)</h4>
+                                <button type="button" class="add-btn" data-type="lai">+</button>
+                            </div>
+                            <div class="data-entry">
+                                <label for="lai-sequence">Secuencia (O=acierto, X=fallo, máx. 20):</label>
+                                <textarea id="lai-sequence" placeholder="Ej: OXOOOXXOOX (máx. 20)"></textarea>
+                            </div>
+                            <div id="lai-container" class="custom-sequences-container"></div>
+                        </div>
+
+                        <div class="record-group">
+                            <div class="group-header">
+                                <h4>Lateral Derecho (LAD)</h4>
+                                <button type="button" class="add-btn" data-type="lad">+</button>
+                            </div>
+                            <div class="data-entry">
+                                <label for="lad-sequence">Secuencia (O=acierto, X=fallo, máx. 20):</label>
+                                <textarea id="lad-sequence" placeholder="Ej: OXOOOXXOOX (máx. 20)"></textarea>
+                            </div>
+                            <div id="lad-container" class="custom-sequences-container"></div>
+                        </div>
+
+                        <div class="record-group">
+                            <div class="group-header">
+                                <h4>Garganta Lateral (GL)</h4>
+                                <button type="button" class="add-btn" data-type="gl">+</button>
+                            </div>
+                            <div class="data-entry">
+                                <label for="gl-sequence">Secuencia (O=acierto, X=fallo, máx. 20):</label>
+                                <textarea id="gl-sequence" placeholder="Ej: OXOXOXOXOXOXOXOXOX (máx. 20)"></textarea>
+                            </div>
+                            <div id="gl-container" class="custom-sequences-container"></div>
+                        </div>
+
+                        <div class="record-group">
+                            <div class="group-header">
+                                <h4>Garganta Central (GC)</h4>
+                                <button type="button" class="add-btn" data-type="gc">+</button>
+                            </div>
+                            <div class="data-entry">
+                                <label for="gc-sequence">Secuencia (O=acierto, X=fallo, máx. 20):</label>
+                                <textarea id="gc-sequence" placeholder="Ej: OXOXOXOXOX (máx. 20)"></textarea>
+                            </div>
+                            <div id="gc-container" class="custom-sequences-container"></div>
+                        </div>
+
+                        <div class="record-group">
+                            <div class="group-header">
+                                <h4>Garganta Lateral Derecha (GLD)</h4>
+                                <button type="button" class="add-btn" data-type="gld">+</button>
+                            </div>
+                            <div class="data-entry">
+                                <label for="gld-sequence">Secuencia (O=acierto, X=fallo, máx. 20):</label>
+                                <textarea id="gld-sequence" placeholder="Ej: OXOXOXOXOX (máx. 20)"></textarea>
+                            </div>
+                            <div id="gld-container" class="custom-sequences-container"></div>
+                        </div>
+                        
+                        <div class="record-group">
+                            <div class="group-header">
+                                <h4>Garganta Lateral Izquierda (GLI)</h4>
+                                <button type="button" class="add-btn" data-type="gli">+</button>
+                            </div>
+                            <div class="data-entry">
+                                <label for="gli-sequence">Secuencia (O=acierto, X=fallo, máx. 20):</label>
+                                <textarea id="gli-sequence" placeholder="Ej: OXOXOXOXOX (máx. 20)"></textarea>
+                            </div>
+                            <div id="gli-container" class="custom-sequences-container"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Tiempos de Apnea (en segundos)</h3>
+                <div class="apnea-times">
+                    <div class="apnea-info-banner">
+                        <span class="apnea-info-icon">ℹ️</span>
+                        <span class="apnea-info-text">Ingresa los tiempos en segundos (ejemplo: 120 = 2 minutos)</span>
+                    </div>
+                    <div class="apnea-fixed-grid">
+                        <div class="apnea-fixed-entry">
+                            <label for="apnea1">Vuelta 1:</label>
+                            <input type="number" id="apnea1" min="0" step="1" placeholder="150">
+                        </div>
+                        <div class="apnea-fixed-entry">
+                            <label for="apnea2">Vuelta 2:</label>
+                            <input type="number" id="apnea2" min="0" step="1" placeholder="150">
+                        </div>
+                        <div class="apnea-fixed-entry">
+                            <label for="apnea3">Vuelta 3:</label>
+                            <input type="number" id="apnea3" min="0" step="1" placeholder="150">
+                        </div>
+                        <div class="apnea-fixed-entry">
+                            <label for="apnea4">Vuelta 4:</label>
+                            <input type="number" id="apnea4" min="0" step="1" placeholder="150">
+                        </div>
+                        <div class="apnea-fixed-entry">
+                            <label for="apnea5">Vuelta 5:</label>
+                            <input type="number" id="apnea5" min="0" step="1" placeholder="150">
+                        </div>
+                        <div class="apnea-fixed-entry">
+                            <label for="apnea6">Vuelta 6:</label>
+                            <input type="number" id="apnea6" min="0" step="1" placeholder="150">
+                        </div>
+                        <div class="apnea-fixed-entry">
+                            <label for="apnea7">Vuelta 7:</label>
+                            <input type="number" id="apnea7" min="0" step="1" placeholder="150">
+                        </div>
+                        <div class="apnea-fixed-entry">
+                            <label for="apnea8">Vuelta 8:</label>
+                            <input type="number" id="apnea8" min="0" step="1" placeholder="150">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="generate-report-btn" class="primary-btn" onclick="generateReport()">Generar informe</button>
+                    <button id="clear-form-btn" class="secondary-btn" onclick="clearForm()">Limpiar formulario</button>
+                </div>
+            </div>
+
+            <div id="report" class="tab-content">
+                <div id="report-content">
+                    <div id="report-header">
+                        <img src="img/cortex-logo.svg" alt="Academia Cortex Logo" class="report-logo">
+                        <h1>Academia Cortex</h1>
+                        <p class="tagline">Para los que quieren formar parte del 2% de las personas con capacidades mentales extraordinarias</p>
+                    </div>
+
+                    <div id="student-info">
+                        <h3>Información del Estudiante</h3>
+                        <p><strong>Nombre:</strong> <span id="report-name"></span></p>
+                        <p><strong>Fecha:</strong> <span id="report-date"></span></p>
+                        <p><strong>País:</strong> <span id="report-country"></span></p>
+                        <p><strong>Notas:</strong> <span id="report-notes"></span></p>
+                        <p><strong>Testimonio:</strong> <span id="report-testimony"></span></p>
+                    </div>
+
+                    <div id="location-stats">
+                        <h3>Estadísticas de Localización</h3>
+                        <div class="stats-container">
+                            <div class="stat-item">
+                                <p><strong>Altitud:</strong> <span id="report-altitude"></span> m</p>
+                            </div>
+                            <div class="stat-item">
+                                <p><strong>Humedad relativa:</strong> <span id="report-humidity"></span>%</p>
+                            </div>
+                            <div class="stat-item">
+                                <p><strong>Nivel de oxígeno:</strong> <span id="report-oxygen"></span>%</p>
+                            </div>
+                            <div class="stat-item">
+                                <p><strong>Dato relevante:</strong> <span id="report-fact"></span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="vision-results">
+                        <h3>Resultados de Visualización</h3>
+                        <div class="results-container">
+                            <div class="visualization-column">
+                                <h4>Áreas de percepción visual</h4>
+                                <div class="visualization-images">
+                                    <div class="vis-image-container lateralIzq">
+                                        <img src="img/img_lateral.jpg" alt="Lateral Izquierdo" class="vis-image" id="lateralIzq-img">
+                                        <div class="chart-overlay">
+                                            <canvas id="lai-chart"></canvas>
+                                        </div>
+                                        <div class="stats-text">
+                                            <p><strong>Lateral Izquierdo (LAI)</strong></p>
+                                            <p>Aciertos: <span id="lai-hits">0</span></p>
+                                            <p>Fallos: <span id="lai-misses">0</span></p>
+                                            <p>Precisión: <span id="lai-accuracy">0</span>%</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="vis-image-container lateralDer">
+                                        <img src="img/img_lateral.jpg" alt="Lateral Derecho" class="vis-image" id="lateralDer-img">
+                                        <div class="chart-overlay">
+                                            <canvas id="lad-chart"></canvas>
+                                        </div>
+                                        <div class="stats-text">
+                                            <p><strong>Lateral Derecho (LAD)</strong></p>
+                                            <p>Aciertos: <span id="lad-hits">0</span></p>
+                                            <p>Fallos: <span id="lad-misses">0</span></p>
+                                            <p>Precisión: <span id="lad-accuracy">0</span>%</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="vis-image-container garganta">
+                                        <img src="img/img_garganta.jpg" alt="Garganta Lateral" class="vis-image" id="garganta-img">
+                                        <div class="chart-overlay">
+                                            <canvas id="gl-chart"></canvas>
+                                        </div>
+                                        <div class="stats-text">
+                                            <p><strong>Garganta Lateral (GL)</strong></p>
+                                            <p>Aciertos: <span id="gl-hits">0</span></p>
+                                            <p>Fallos: <span id="gl-misses">0</span></p>
+                                            <p>Precisión: <span id="gl-accuracy">0</span>%</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="vis-image-container central">
+                                        <img src="img/img_central.jpg" alt="Garganta Central" class="vis-image" id="central-img">
+                                        <div class="chart-overlay">
+                                            <canvas id="gc-chart"></canvas>
+                                        </div>
+                                        <div class="stats-text">
+                                            <p><strong>Garganta Central (GC)</strong></p>
+                                            <p>Aciertos: <span id="gc-hits">0</span></p>
+                                            <p>Fallos: <span id="gc-misses">0</span></p>
+                                            <p>Precisión: <span id="gc-accuracy">0</span>%</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="vis-image-container gargarantaDer">
+                                        <img src="img/img_derecha.jpg" alt="Garganta Lateral Derecha" class="vis-image" id="gargarantaDer-img">
+                                        <div class="chart-overlay">
+                                            <canvas id="gld-chart"></canvas>
+                                        </div>
+                                        <div class="stats-text">
+                                            <p><strong>Garganta Lateral Derecha (GLD)</strong></p>
+                                            <p>Aciertos: <span id="gld-hits">0</span></p>
+                                            <p>Fallos: <span id="gld-misses">0</span></p>
+                                            <p>Precisión: <span id="gld-accuracy">0</span>%</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="vis-image-container gargantaIzq">
+                                        <img src="img/img_derecha.jpg" alt="Garganta Lateral Izquierda" class="vis-image" id="gargantaIzq-img">
+                                        <div class="chart-overlay">
+                                            <canvas id="gli-chart"></canvas>
+                                        </div>
+                                        <div class="stats-text">
+                                            <p><strong>Garganta Lateral Izquierda (GLI)</strong></p>
+                                            <p>Aciertos: <span id="gli-hits">0</span></p>
+                                            <p>Fallos: <span id="gli-misses">0</span></p>
+                                            <p>Precisión: <span id="gli-accuracy">0</span>%</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="apnea-results">
+                        <h3>Resultados de Apnea</h3>
+                        <div class="apnea-results-grid">
+                            <div class="apnea-summary-box">
+                                <div class="apnea-metric">
+                                    <div class="apnea-value" id="max-apnea">0:00</div>
+                                    <div class="apnea-label">Tiempo máximo</div>
+                                </div>
+                            </div>
+                            <div class="apnea-summary-box">
+                                <div class="apnea-metric">
+                                    <div class="apnea-value" id="avg-apnea">0:00</div>
+                                    <div class="apnea-label">Tiempo promedio</div>
+                                </div>
+                            </div>
+                            <div class="apnea-summary-box">
+                                <div class="apnea-metric">
+                                    <div class="apnea-value" id="total-apneas">0</div>
+                                    <div class="apnea-label">Total vueltas</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="apnea-evaluation">
+                            <p id="apnea-evaluation-text"></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button id="save-pdf-btn" class="primary-btn" onclick="exportSimplePDF()">Guardar como PDF</button>
+                    <button id="edit-btn" class="secondary-btn" onclick="openTab('data-entry')">Editar datos</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Academia Cortex. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

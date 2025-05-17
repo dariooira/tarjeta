@@ -1,0 +1,87 @@
+/* Estilos para impresión */
+@media print {
+    /* Ocultar elementos que no necesitamos imprimir */
+    header, 
+    .tabs, 
+    .tab-links,
+    .footer,
+    .action-buttons,
+    button {
+        display: none !important;
+    }
+    
+    /* Asegurar que solo el reporte se ve */
+    #report-content {
+        display: block !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    /* Estilos básicos para la página impresa */
+    body {
+        font-family: Arial, sans-serif;
+        color: #000;
+        background: #fff;
+        font-size: 12pt;
+        line-height: 1.4;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Cuadros simplificados para resultados */
+    .result-box {
+        width: 100px;
+        height: 100px;
+        margin: 10px;
+        text-align: center;
+        display: inline-block;
+        box-shadow: none !important;
+        border: 1px solid #ccc;
+        page-break-inside: avoid;
+    }
+    
+    .result-box .percentage {
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 30px;
+    }
+    
+    /* Estilos para colores de rendimiento */
+    .good-result {
+        background-color: rgba(76, 175, 80, 0.3) !important;
+    }
+    .average-result {
+        background-color: rgba(255, 193, 7, 0.3) !important;
+    }
+    .poor-result {
+        background-color: rgba(244, 67, 54, 0.3) !important;
+    }
+    
+    /* Contenedores para organizar la página */
+    .print-section {
+        margin-bottom: 20px;
+        page-break-inside: avoid;
+    }
+    
+    /* Títulos y texto */
+    h1, h2, h3 {
+        page-break-after: avoid;
+    }
+    
+    /* Asegurar que los elementos no se corten entre páginas */
+    tr, img, table {
+        page-break-inside: avoid;
+    }
+    
+    /* Ajustar el tamaño de los contenedores */
+    .container {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Evitar que URLs aparezcan después de los enlaces */
+    a[href]:after {
+        content: none !important;
+    }
+}

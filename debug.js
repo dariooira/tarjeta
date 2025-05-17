@@ -1,0 +1,1 @@
+console.log = (function(originalConsoleLog) { return function(text) { if (text && text.toString().includes('Error al generar el informe')) { console.trace('Stack trace para el error:'); } originalConsoleLog.apply(console, arguments); }; })(console.log);
