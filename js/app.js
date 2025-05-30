@@ -666,8 +666,8 @@ function generateReport() {
             const imageHTML = imagePath ? `<img src="${imagePath}" class="result-image" alt="">` : '';
             let visual = `
             <div class="sequence-visual-container">
+                ${imageHTML}
                 <div class="result-box ${resultClass}">
-                    ${imageHTML}
                     <div class="percentage-display">${hitPercentage}%</div>
                 </div>
                 <div class="result-stats">
@@ -731,7 +731,7 @@ function generateReport() {
                                         ${laiCustom.map((seq, i) => hasValidSequenceData(seq) ? `
                                             <div class="custom-sequence-item">
                                                 <h6>Secuencia ${i+1}</h6>
-                                                <div class="sequence-result">${generateSequenceVisual(seq)}</div>
+                                                <div class="sequence-result">${generateSequenceVisual(seq, 'img/cortex-person.jpg')}</div>
                                                 <p>Aciertos: ${laiCustomStats[i].hits} / Fallos: ${laiCustomStats[i].misses}</p>
                                                 <p>Precisión: ${laiCustomStats[i].accuracy}%</p>
                                             </div>
@@ -756,7 +756,7 @@ function generateReport() {
                                         ${ladCustom.map((seq, i) => hasValidSequenceData(seq) ? `
                                             <div class="custom-sequence-item">
                                                 <h6>Secuencia ${i+1}</h6>
-                                                <div class="sequence-result">${generateSequenceVisual(seq)}</div>
+                                                <div class="sequence-result">${generateSequenceVisual(seq, 'img/cortex-person.jpg')}</div>
                                                 <p>Aciertos: ${ladCustomStats[i].hits} / Fallos: ${ladCustomStats[i].misses}</p>
                                                 <p>Precisión: ${ladCustomStats[i].accuracy}%</p>
                                             </div>
@@ -769,7 +769,7 @@ function generateReport() {
                             <div class="performance-item">
                                 <h4>Garganta Lateral (GL)</h4>
                                 <div class="sequence-result">
-                                    ${generateSequenceVisual(gl)}
+                                    ${generateSequenceVisual(gl, 'img/tarjeta-garganta.jpg')}
                                 </div>
                                 <p>Aciertos: ${glStats.hits} / Fallos: ${glStats.misses}</p>
                                 <p>Precisión: ${glStats.accuracy}%</p>
@@ -779,7 +779,7 @@ function generateReport() {
                                         ${glCustom.map((seq, i) => hasValidSequenceData(seq) ? `
                                             <div class="custom-sequence-item">
                                                 <h6>Secuencia ${i+1}</h6>
-                                                <div class="sequence-result">${generateSequenceVisual(seq)}</div>
+                                                <div class="sequence-result">${generateSequenceVisual(seq, 'img/tarjeta-garganta.jpg')}</div>
                                                 <p>Aciertos: ${glCustomStats[i].hits} / Fallos: ${glCustomStats[i].misses}</p>
                                                 <p>Precisión: ${glCustomStats[i].accuracy}%</p>
                                             </div>
@@ -792,7 +792,7 @@ function generateReport() {
                             <div class="performance-item">
                                 <h4>Garganta Central (GC)</h4>
                                 <div class="sequence-result">
-                                    ${generateSequenceVisual(gc)}
+                                    ${generateSequenceVisual(gc, 'img/tarjeta-garganta.jpg')}
                                 </div>
                                 <p>Aciertos: ${gcStats.hits} / Fallos: ${gcStats.misses}</p>
                                 <p>Precisión: ${gcStats.accuracy}%</p>
@@ -802,7 +802,7 @@ function generateReport() {
                                         ${gcCustom.map((seq, i) => hasValidSequenceData(seq) ? `
                                             <div class="custom-sequence-item">
                                                 <h6>Secuencia ${i+1}</h6>
-                                                <div class="sequence-result">${generateSequenceVisual(seq)}</div>
+                                                <div class="sequence-result">${generateSequenceVisual(seq, 'img/tarjeta-garganta.jpg')}</div>
                                                 <p>Aciertos: ${gcCustomStats[i].hits} / Fallos: ${gcCustomStats[i].misses}</p>
                                                 <p>Precisión: ${gcCustomStats[i].accuracy}%</p>
                                             </div>
@@ -815,7 +815,7 @@ function generateReport() {
                             <div class="performance-item">
                                 <h4>Garganta Lateral Derecha (GLD)</h4>
                                 <div class="sequence-result">
-                                    ${generateSequenceVisual(gld)}
+                                    ${generateSequenceVisual(gld, 'img/tarjeta-garganta.jpg')}
                                 </div>
                                 <p>Aciertos: ${gldStats.hits} / Fallos: ${gldStats.misses}</p>
                                 <p>Precisión: ${gldStats.accuracy}%</p>
@@ -825,7 +825,7 @@ function generateReport() {
                                         ${gldCustom.map((seq, i) => hasValidSequenceData(seq) ? `
                                             <div class="custom-sequence-item">
                                                 <h6>Secuencia ${i+1}</h6>
-                                                <div class="sequence-result">${generateSequenceVisual(seq)}</div>
+                                                <div class="sequence-result">${generateSequenceVisual(seq, 'img/tarjeta-garganta.jpg')}</div>
                                                 <p>Aciertos: ${gldCustomStats[i].hits} / Fallos: ${gldCustomStats[i].misses}</p>
                                                 <p>Precisión: ${gldCustomStats[i].accuracy}%</p>
                                             </div>
@@ -838,7 +838,7 @@ function generateReport() {
                             <div class="performance-item">
                                 <h4>Garganta Lateral Izquierda (GLI)</h4>
                                 <div class="sequence-result">
-                                    ${generateSequenceVisual(gli)}
+                                    ${generateSequenceVisual(gli, 'img/tarjeta-garganta.jpg')}
                                 </div>
                                 <p>Aciertos: ${gliStats.hits} / Fallos: ${gliStats.misses}</p>
                                 <p>Precisión: ${gliStats.accuracy}%</p>
@@ -848,7 +848,7 @@ function generateReport() {
                                         ${gliCustom.map((seq, i) => hasValidSequenceData(seq) ? `
                                             <div class="custom-sequence-item">
                                                 <h6>Secuencia ${i+1}</h6>
-                                                <div class="sequence-result">${generateSequenceVisual(seq)}</div>
+                                                <div class="sequence-result">${generateSequenceVisual(seq, 'img/tarjeta-garganta.jpg')}</div>
                                                 <p>Aciertos: ${gliCustomStats[i].hits} / Fallos: ${gliCustomStats[i].misses}</p>
                                                 <p>Precisión: ${gliCustomStats[i].accuracy}%</p>
                                             </div>
