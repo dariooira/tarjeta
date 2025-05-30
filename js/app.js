@@ -44,7 +44,7 @@ function initializeApneaTurns(count = 4) {
         apneaEntry.id = `apnea-entry-${i}`;
         apneaEntry.innerHTML = `
             <label for="apnea${i}">Vuelta ${i}:</label>
-            <input type="number" id="apnea${i}" min="0" step="1" placeholder="150">
+            <input type="text" id="apnea${i}" placeholder="02:30">
             ${i > 1 ? `<button type="button" class="remove-btn" onclick="removeApnea(${i})">&times;</button>` : ''}
         `;
         
@@ -85,32 +85,23 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Add event listeners to automatically format apnea times
+    // Aplicar máscara de tiempo MM:SS en los campos de apnea
     document.querySelectorAll('input[id^="apnea"]').forEach(input => {
         input.addEventListener('input', function() {
-            // Si ya tiene formato MM:SS, no hacemos nada
-            if (this.value.includes(':')) return;
-            
-            const value = this.value;
-            // Formato directo para cualquier número entero
-            if (/^\d+$/.test(value)) {
-                const numValue = parseInt(value);
-                const minutes = Math.floor(numValue / 60);
-                const seconds = numValue % 60;
-                this.value = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            let digits = this.value.replace(/\D/g, '');
+            if (digits.length > 4) digits = digits.slice(0, 4);
+            if (digits.length >= 3) {
+                digits = digits.replace(/(\d{2})(\d{0,2}).*/, '$1:$2');
             }
+            this.value = digits;
         });
-        
-        // También activar cuando el campo pierde el foco
+
         input.addEventListener('blur', function() {
-            if (!this.value.includes(':') && this.value) {
-                // Convertir cualquier número (incluyendo decimales) a formato MM:SS
-                const numValue = parseFloat(this.value) || 0;
-                const totalSeconds = Math.round(numValue * 60);
-                const minutes = Math.floor(totalSeconds / 60);
-                const seconds = totalSeconds % 60;
-                this.value = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-            }
+            let digits = this.value.replace(/\D/g, '');
+            if (digits.length === 0) { this.value = ''; return; }
+            while (digits.length < 4) digits = '0' + digits;
+            digits = digits.replace(/(\d{2})(\d{2})/, '$1:$2');
+            this.value = digits;
         });
     });
 });
@@ -220,7 +211,7 @@ function addCustomApnea() {
     newApnea.id = `apnea-entry-${nextApneaNumber}`;
     newApnea.innerHTML = `
         <label for="apnea${nextApneaNumber}">Vuelta ${nextApneaNumber}:</label>
-        <input type="number" id="apnea${nextApneaNumber}" min="0" step="1" placeholder="150">
+        <input type="text" id="apnea${nextApneaNumber}" placeholder="02:30">
         <button type="button" class="remove-btn" onclick="removeApnea(${nextApneaNumber})">&times;</button>
     `;
     
