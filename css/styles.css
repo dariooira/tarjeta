@@ -450,6 +450,12 @@ textarea {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 6px;
+}
+
+.result-image {
+    max-width: 40px;
+    height: auto;
 }
 
 /* Diferentes estilos según el resultado */

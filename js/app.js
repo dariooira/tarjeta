@@ -641,7 +641,7 @@ function generateReport() {
         }
         
         // Función para crear visualización de secuencia con imagen del personaje
-        function generateSequenceVisual(sequence) {
+        function generateSequenceVisual(sequence, imagePath = null) {
             if (!hasValidSequenceData(sequence)) return '';
             
             // Contar aciertos y fallos
@@ -672,9 +672,11 @@ function generateReport() {
             }
             
             // Crear representación visual con cuadrado y porcentaje en el centro
+            const imageHTML = imagePath ? `<img src="${imagePath}" class="result-image" alt="">` : '';
             let visual = `
             <div class="sequence-visual-container">
                 <div class="result-box ${resultClass}">
+                    ${imageHTML}
                     <div class="percentage-display">${hitPercentage}%</div>
                 </div>
                 <div class="result-stats">
@@ -726,10 +728,9 @@ function generateReport() {
                             <div class="performance-item lateral-item">
                                 <div class="lateral-header">
                                     <h4>Lateral Izquierdo (LAI)</h4>
-                                    <img src="img/cortex-person.jpg" alt="Persona Cortex" class="cortex-card-image">
                                 </div>
                                 <div class="sequence-result">
-                                    ${generateSequenceVisual(lai)}
+                                    ${generateSequenceVisual(lai, 'img/cortex-person.jpg')}
                                 </div>
                                 <p>Aciertos: ${laiStats.hits} / Fallos: ${laiStats.misses}</p>
                                 <p>Precisión: ${laiStats.accuracy}%</p>
@@ -752,10 +753,9 @@ function generateReport() {
                             <div class="performance-item lateral-item">
                                 <div class="lateral-header">
                                     <h4>Lateral Derecho (LAD)</h4>
-                                    <img src="img/cortex-person.jpg" alt="Persona Cortex" class="cortex-card-image">
                                 </div>
                                 <div class="sequence-result">
-                                    ${generateSequenceVisual(lad)}
+                                    ${generateSequenceVisual(lad, 'img/cortex-person.jpg')}
                                 </div>
                                 <p>Aciertos: ${ladStats.hits} / Fallos: ${ladStats.misses}</p>
                                 <p>Precisión: ${ladStats.accuracy}%</p>
