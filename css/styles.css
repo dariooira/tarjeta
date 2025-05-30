@@ -312,14 +312,16 @@ textarea {
     padding: 1rem;
 }
 
-#report-header {
+#report-header,
+.report-header {
     text-align: center;
     margin-bottom: 2rem;
 }
 
 .report-logo {
+    display: block;
+    margin: 0 auto 1rem;
     max-height: 80px;
-    margin-bottom: 1rem;
     filter: invert(1);
 }
 
